@@ -1,8 +1,8 @@
 export const tests = [
     {
         id:1,
-        savol: "1) 2+2 necciga teng",
-        javob: 4,
+        savol: "1) Дана треугольник у которого стороны равны 4 и 5 см. Найдите 3-ью сторону",
+        javob: 6,
         otvetlar:[
             {   
                 userId: 'a',
@@ -12,51 +12,51 @@ export const tests = [
             {
                 userId: 'b',
                 testId: 2,
-                otvet: 1 
+                otvet: 5 
             },
             ,{
                 userId: 'c',
                 testId: 3,
-                otvet: 2 
+                otvet: 6 
             }
             ,{
                 userId: 'd',
                 testId: 4,
-                otvet: 3 
+                otvet: 7 
             }
         ]
     },
     {
         id:2,
-        savol: "2) 3+3 necciga teng",
-        javob: 6,
+        savol: "2) Найти гипотенузу треугольника, у которого катеты равны 20 и 15 см",
+        javob: 25,
         otvetlar:[
             {   
                 userId: 'a',
                 testId: 5,
-                otvet: 4 
+                otvet: 24 
             },
             {
                 userId: 'b',
                 testId: 6,
-                otvet: 6
+                otvet: 25
             },
             ,{
                 userId: 'c',
                 testId: 7,
-                otvet: 2 
+                otvet: 26 
             }
             ,{
                 userId: 'd',
                 testId: 8,
-                otvet: 3 
+                otvet: 27 
             }
         ]
     },
     {
         id:3,
-        savol: "3) 5+5 necciga teng",
-        javob: 10,
+        savol: "3) Найдите среднее арифметическое число: 1,5,6,8,10",
+        javob: 6,
         otvetlar:[
             {   
                 userId: 'a',
@@ -82,55 +82,55 @@ export const tests = [
     },
     {
         id:4,
-        savol: "4) 6+6 necciga teng",
-        javob: 12,
+        savol: "4) Из точки А вышли два автомобиля двигаясь против друг друга, со скоросьтю 60км/ч, через какое время расстояние между ними достигнет 180км",
+        javob: "90 мин",
         otvetlar:[
             {   
                 userId: 'a',
                 testId: 13,
-                otvet: 12 
+                otvet: "60 мин" 
             },
             {
                 userId: 'b',
                 testId: 14,
-                otvet: 6
+                otvet: "70 мин"
             },
             ,{
                 userId: 'c',
                 testId: 15,
-                otvet: 14 
+                otvet: "80 мин"
             }
             ,{
                 userId: 'd',
                 testId: 16,
-                otvet: 11 
+                otvet: "90 мин" 
             }
         ]
     },
     {
         id:5,
-        savol: "5) 5+3 necciga teng",
-        javob: 8,
+        savol: "5) Из точки А вышли два автомобиля двигаясь против друг друга, со скоросьтю 60км/ч, они двигались 2 часа. Найти расстояние между ними",
+        javob: "240 км/ч",
         otvetlar:[
             {   
                 userId: 'a',
                 testId: 17,
-                otvet: 4 
+                otvet: "230 км/ч" 
             },
             {
                 userId: 'b',
                 testId: 18,
-                otvet: 6
+                otvet: "240 км/ч"
             },
             ,{
                 userId: 'c',
                 testId: 19,
-                otvet: 8 
+                otvet: "250 км/ч" 
             }
             ,{
                 userId: 'd',
                 testId: 20,
-                otvet: 9 
+                otvet: "260 км/ч" 
             }
         ]
     },

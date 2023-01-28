@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Context } from '../../Context/Context'
 import { tests } from '../../dataTest/dataTest'
 import './Tests.scss'
 
@@ -9,41 +11,47 @@ function Tests() {
     const [count, setCount] = useState(0)
     const [bgColor, setBgColor] = useState(0)
     const [colorrr, setColor] = useState(0)
-
-
+    const {setResult} = useContext(Context)
+    const namee = document.getElementsByTagName('input')
+    const labell = document.getElementsByTagName('label')
+    const numbers = document.getElementsByClassName('sonlar')
+    for(let i = 0; i < namee.length; i++){
+        if(namee[i].checked){
+            labell[i].style.background = `rgba(0, 24, 244, 0.2)`    
+            itemId.map((e)=>{
+                for (let o = 0; o <= numbers.length; o++) {
+                    // console.log(numbers[o]);
+                    let u =  o + 1
+                    if(e == u){
+                        numbers[o].style.background = `rgba(0, 24, 244, 0.2)`
+                    }
+                }
+            })
+        }else{
+            labell[i].style.background = 'none'
+        }
+    }
+    
+    // console.log(itemId);
+    const navigate = useNavigate()
     const done = (e)=>{
         e.preventDefault()
+        navigate('/result')
         tests?.map((e)=>{
-            const namee = document.getElementsByTagName('input')
             for (let i = 0; i < namee.length; i++){
-                console.log(namee.id);
                 if(namee[i].checked){
                     const val = namee[i].value
                     setBgColor(val)
                     if(val == e.javob){
                         otvet.push(val)
+                        setResult(otvet.length)
                         console.log(otvet);
-                        for(let o = 1; o <= otvet.length; o++){
-                            setCount(o)
-                        }
                     }
                 }
             }
         })
     }
 
-    const pusher = (e)=>{
-        itemId.push(e)
-        console.log(e.target);
-    }
-    
-    useEffect(()=>{
-        console.log();
-    }, [colorrr])
-
-    function checkId(chek) {
-        return chek == 2
-    }
 
   return (
     <div className='container'>
@@ -51,10 +59,9 @@ function Tests() {
         <p>2 : 40 : 50</p>
         <ul>
             <h5>Matem (3.1ball)</h5>
-            <h6 id='demo'></h6>
             {
                 tests?.map((e,i)=>(
-                    <li className={pusher? 'active': ''}>{e.id}</li>
+                    <li className='sonlar'>{e.id}</li>
                 ))
             }
         </ul>
@@ -67,23 +74,20 @@ function Tests() {
                         <h4 name={`javob${e.id}`}>{
                             e.otvetlar.map((item)=>(
                                 <>
-                                <input type="radio" id={item.testId} name={e.id} value={item.otvet}/>
-                                <label onClick={()=>{
-                                    if(!itemId.includes(e.id))
-                                    itemId.push(e.id)
-                                    setColor(itemId.find((i)=> i == e.id ))
+                                <input onClick={()=>{
                                     setBgColor(item.testId)
-                                    }} className={bgColor == item.testId? 'label__active' : ''} htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
+                                    !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
+                                    }} type="radio" id={item.testId} name={e.id} value={item.otvet}/>
+                                <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
                                 </>
                             ))    
                         }</h4>
                     </li>
                 ))
             }
-            <button type='submit'>Done!</button>
+            <button type='submit'>Отправить</button>
             </form>
         </ol>
-        <h2>Test yakunlandi togri javoblar soni: {count * 100 / 5}%</h2>
     </div>
   )
 }
