@@ -115,22 +115,22 @@ export const tests = [
             {   
                 userId: 'a',
                 testId: 17,
-                otvet: "230 км/ч" 
+                otvet: "230 км" 
             },
             {
                 userId: 'b',
                 testId: 18,
-                otvet: "240 км/ч"
+                otvet: "240 км"
             },
             ,{
                 userId: 'c',
                 testId: 19,
-                otvet: "250 км/ч" 
+                otvet: "250 км" 
             }
             ,{
                 userId: 'd',
                 testId: 20,
-                otvet: "260 км/ч" 
+                otvet: "260 км" 
             }
         ]
     },
