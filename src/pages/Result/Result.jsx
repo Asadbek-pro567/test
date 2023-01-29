@@ -1,24 +1,31 @@
 import React, { useContext, useEffect } from 'react'
 import './Result.scss'
-import { Doughnut } from 'react-chartjs-2';
 import { Context } from '../../Context/Context';
 import { tests } from '../../dataTest/dataTest';
+import { useNavigate } from 'react-router-dom';
 
 function Result() {
   const {result, setResult} = useContext(Context)
+  const {res, setRes} = useContext(Context)
+  
   const number = []
   tests?.map(e=>{
     number.push(e.id)
   })
+
+  window.sessionStorage.setItem('))', 'close')
+
   const foiz = number.pop()
   const fir = result * 100 / foiz
   const circle  = document.getElementsByClassName('circle')
   useEffect(()=>{
     for (let i = 0; i < circle.length; i++){
       circle[i].style.background = `conic-gradient(#BD00FF 0%, #BD00FF ${fir}%, rgb(220, 238, 255) ${fir}%, rgb(220, 238, 255) 100%)`
-      console.log(circle[i]);
     }
   }, [result])
+  
+  const natija = result * 3.1
+  setRes(natija)
   return (
     <div className='containerr'>
       <div className="result">
@@ -46,7 +53,7 @@ function Result() {
             </div>
           </div>
         </div>
-        <h5><span>{result * 3.1}</span> Общий результат</h5>
+        <h5><span>{natija}</span> Общий результат</h5>
 
       </div>
     </div>
