@@ -1,117 +1,128 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../../Context/Context'
 import { tests } from '../../dataTest/dataTest'
+import { data } from '../../dataTest/users'
 import './Tests.scss'
 
 const itemId = []
 function Tests() {
-    const getPadTime = (time) => time.toString().padStart(2,'0')
-    const [timeleft ,setTimeleft] = useState(3 * 60)
-    const [tori,setTori] = useState(true)
-    const {res} = useContext(Context)
+    const getPadTime = (time) => time.toString().padStart(2, '0')
+    const [timeleft, setTimeleft] = useState(10)
+    const [tori, setTori] = useState(true)
     const minutes = getPadTime(Math.floor(timeleft / 60))
     const seconds = getPadTime(timeleft - minutes * 60)
-    useEffect(()=>{
-        const interval = setInterval(()=>{
-            setTimeleft((timeleft)=> timeleft >= 1? timeleft -1 : 0)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeleft((timeleft) => timeleft >= 1 ? timeleft - 1 : 0)
         }, 1000)
-        if(timeleft === 0) setTori(false)
-        if(window.sessionStorage.getItem('))') == 'close'){
+        if (timeleft === 0) setTori(false)
+        if (data.map((e) => e.ts) == 'close') {
             navigate('/')
-            alert(`Вы закончили тест. Ваш результат: ${res}б`)
-        }else{
+            alert(`Вы закончили тест. Ваш результат: 30б`)
+        } else {
             setTimeout(() => {
-                navigate('/result')
+                // navigate('/result')
             }, timeleft * 1000);
         }
-        return ()=>{
+        return () => {
             clearInterval(interval)
         }
     }, [timeleft, tori])
 
     const otvet = []
+    const otvetlar = []
+
     const [count, setCount] = useState(0)
     const [bgColor, setBgColor] = useState(0)
     const [colorrr, setColor] = useState(0)
-    const {setResult} = useContext(Context)
+    const dispatch = useDispatch()
     const namee = document.getElementsByTagName('input')
     const labell = document.getElementsByTagName('label')
     const numbers = document.getElementsByClassName('sonlar')
-    useEffect(()=>{
-        for(let i = 0; i < namee.length; i++){
-            if(namee[i].checked){
-                labell[i].style.background = `rgba(0, 24, 244, 0.2)`    
-                itemId.map((e)=>{
+
+    useEffect(() => {
+        for (let i = 0; i < namee.length; i++) {
+            if (namee[i].checked) {
+                labell[i].style.background = `rgba(0, 24, 244, 0.2)`
+                itemId.map((e) => {
                     for (let o = 0; o <= numbers.length; o++) {
-                        let u =  o + 1
-                        if(e == u){
+                        let u = o + 1
+                        if (e == u) {
                             numbers[o].style.background = `rgba(0, 24, 244, 0.2)`
                         }
                     }
                 })
-            }else{
+            } else {
                 labell[i].style.background = 'none'
             }
         }
     }, [colorrr])
-    
+
+
     const navigate = useNavigate()
-    const done = (e)=>{
+    const [asd, setAsd] = useState(0)
+    const done = (e) => {
         e.preventDefault()
         navigate('/result')
-        tests?.map((e)=>{
-            for (let i = 0; i < namee.length; i++){
-                if(namee[i].checked){
+        tests?.map((e) => {
+            for (let i = 0; i < namee.length; i++) {
+                if (namee[i].checked) {
                     const val = namee[i].value
                     setBgColor(val)
-                    if(val == e.javob){
+                    if (!otvetlar.includes(namee[i].value)) {
+                        otvetlar.push(namee[i].value)
+                    }
+                    setAsd(asd + 1)
+                    dispatch({ type: "ADD", payload: { 'otvetlar': [{'otveti': val}] } })
+                    console.log('ok');
+                    console.log(otvetlar);
+                    if (val == e.javob) {
                         otvet.push(val)
-                        setResult(otvet.length)
                     }
                 }
             }
         })
     }
 
-  return (
-    <div className='container'>
-        <h1>Matem</h1>
-        <p>{minutes} : {seconds}</p>
-        <ul>
-            <h5>Matem (3.1ball)</h5>
-            {
-                tests?.map((e,i)=>(
-                    <li key={i} className='sonlar'>{e.id}</li>
-                ))
-            }
-        </ul>
-        <ol>
-            <form action="#" onSubmit={done}>
-            {
-                tests?.map((e,i)=>(
-                    <li key={i}>
-                        <h3>{e.savol}</h3>
-                        <h4>{
-                            e.otvetlar.map((item)=>(
-                                <>
-                                <input onClick={()=>{
-                                    setBgColor(item.testId)
-                                    setColor(colorrr + 1)
-                                    !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
-                                    }} type="radio" id={item.testId} name={e.id} value={item.otvet}/>
-                                <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
-                                </>
-                            ))    
-                        }</h4>
-                    </li>
-                ))
-            }
-            <button type='submit'>Отправить</button>
-            </form>
-        </ol>
-    </div>
-  )
+    return (
+        <div className='container'>
+            <h1>Matem</h1>
+            <p>{minutes} : {seconds}</p>
+            <ul>
+                <h5>Matem (3.1ball)</h5>
+                {
+                    tests?.map((e, i) => (
+                        <li key={i} className='sonlar'>{e.id}</li>
+                    ))
+                }
+            </ul>
+            <ol>
+                <form action="#" onSubmit={done}>
+                    {
+                        tests?.map((e, i) => (
+                            <li key={i}>
+                                <h3>{e.savol}</h3>
+                                <h4>{
+                                    e.otvetlar.map((item) => (
+                                        <>
+                                            <input onClick={() => {
+                                                setBgColor(item.testId)
+                                                setColor(colorrr + 1)
+                                                !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
+                                            }} type="radio" id={item.testId} name={e.id} value={item.otvet} />
+                                            <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
+                                        </>
+                                    ))
+                                }</h4>
+                            </li>
+                        ))
+                    }
+                    <button type='submit'>Отправить</button>
+                </form>
+            </ol>
+        </div>
+    )
 }
 
 export default Tests

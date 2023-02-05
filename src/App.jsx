@@ -9,7 +9,7 @@ function App() {
   const location = useLocation()
   const navigate = useNavigate()
   useEffect(()=>{
-    if(window.sessionStorage.getItem('key') !== '123'){
+    if(window.sessionStorage.getItem('key') == 'error'){
       navigate('/')
     }
   },[location.pathname])
