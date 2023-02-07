@@ -37,12 +37,8 @@ function Login() {
   return (
     <div className='containerrr'>
       <div className='login'>
-        <div className='login__left'>
-          <img src={Login__logo} alt="" />
-        </div>
         <div className='login__right'>
-          <h2>Sign In</h2>
-          <p>Do not you have an account? <strong>Sig up</strong></p>
+          <h2>Руйхатдан утиш</h2>
           <form className='div' action='#' onSubmit={sign}>
             <input type="text" name='username' placeholder='Email' />
             <input type="password" name='password' placeholder='Password' />

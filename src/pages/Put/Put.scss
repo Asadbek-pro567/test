@@ -1,0 +1,35 @@
+
+
+.my__container{
+    background: url(../../assets/image/flower__bg.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    .put__inner{
+        display: flex;
+        flex-direction: column;
+        div{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px;
+            div{
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+                background: linear-gradient(122.18deg, rgba(113, 65, 129, 0.8) 1.31%, rgba(59, 24, 85, 0.8) 99.01%);
+                border: 1.70303px solid #B98C48;
+                backdrop-filter: blur(4.25758px);
+                h4{
+                    font-size: 22px;
+                    margin-top: 0;
+                    margin-bottom: 40px;
+                }
+            }
+        }
+    }
+}

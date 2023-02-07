@@ -79,7 +79,7 @@ function Tests() {
                         otvetlar.push(namee[i].value)
                     }
                     setAsd(asd + 1)
-                    dispatch({ type: "ADD", payload: { 'otvetlar': [{ 'otveti': val }] } })
+                    dispatch({ type: "ADD", payload: { questions } })
                     if (val == e.javob) {
                         otvet.push(val)
                     }
