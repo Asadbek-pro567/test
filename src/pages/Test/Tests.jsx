@@ -6,32 +6,37 @@ import { data } from '../../dataTest/users'
 import './Tests.scss'
 
 const itemId = []
+const questions = []
 function Tests() {
+
+    const [que, setQue] = useState([])
+    console.log(que);
     const getPadTime = (time) => time.toString().padStart(2, '0')
     const [timeleft, setTimeleft] = useState(10)
     const [tori, setTori] = useState(true)
     const minutes = getPadTime(Math.floor(timeleft / 60))
     const seconds = getPadTime(timeleft - minutes * 60)
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimeleft((timeleft) => timeleft >= 1 ? timeleft - 1 : 0)
-        }, 1000)
-        if (timeleft === 0) setTori(false)
-        if (data.map((e) => e.ts) == 'close') {
-            navigate('/')
-            alert(`Вы закончили тест. Ваш результат: 30б`)
-        } else {
-            setTimeout(() => {
-                // navigate('/result')
-            }, timeleft * 1000);
-        }
-        return () => {
-            clearInterval(interval)
-        }
-    }, [timeleft, tori])
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setTimeleft((timeleft) => timeleft >= 1 ? timeleft - 1 : 0)
+    //     }, 1000)
+    //     if (timeleft === 0) setTori(false)
+    //     if (data.map((e) => e.ts) == 'close') {
+    //         navigate('/')
+    //         alert(`Вы закончили тест. Ваш результат: 30б`)
+    //     } else {
+    //         setTimeout(() => {
+    //             // navigate('/result')
+    //         }, timeleft * 1000);
+    //     }
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [timeleft, tori])
 
     const otvet = []
     const otvetlar = []
+
 
     const [count, setCount] = useState(0)
     const [bgColor, setBgColor] = useState(0)
@@ -74,9 +79,7 @@ function Tests() {
                         otvetlar.push(namee[i].value)
                     }
                     setAsd(asd + 1)
-                    dispatch({ type: "ADD", payload: { 'otvetlar': [{'otveti': val}] } })
-                    console.log('ok');
-                    console.log(otvetlar);
+                    dispatch({ type: "ADD", payload: { 'otvetlar': [{ 'otveti': val }] } })
                     if (val == e.javob) {
                         otvet.push(val)
                     }
@@ -103,18 +106,31 @@ function Tests() {
                         tests?.map((e, i) => (
                             <li key={i}>
                                 <h3>{e.savol}</h3>
-                                <h4>{
-                                    e.otvetlar.map((item) => (
-                                        <>
+                                {
+                                    e.otvetlar.map((item, k) => (
+                                        <h4 key={k}>
                                             <input onClick={() => {
-                                                setBgColor(item.testId)
-                                                setColor(colorrr + 1)
                                                 !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
+                                                setColor(colorrr + 1)
+                                                
+                                                !questions.includes(questions[(e.id) - 1]) ? 
+                                                questions.push({
+                                                        quest: e.id,
+                                                        answer: item.testId
+                                                    }):
+                                                questions?
+                                                 questions.map((w)=>{
+                                                    if(w.quest == e.id){
+                                                        w.answer = item.testId
+                                                    }
+                                                })
+                                                : questions.push()
+                                                setQue(questions)
                                             }} type="radio" id={item.testId} name={e.id} value={item.otvet} />
                                             <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
-                                        </>
+                                        </h4>
                                     ))
-                                }</h4>
+                                }
                             </li>
                         ))
                     }

@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 
 const Context = createContext()
-function Provider({children}){
+function Provider2({children}){
     const [result, setResult] = useState(0)
     const [nik, setNik] = useState()
     const [res, setRes] = useState(0)
@@ -14,4 +14,4 @@ function Provider({children}){
     )
 }
 
-export {Context, Provider}
+export {Context, Provider2}
