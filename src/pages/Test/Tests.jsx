@@ -88,8 +88,8 @@ function Tests() {
             }
         })
         dispatch({ type: "QUEST", payload: { questions } })
-        
-        fetch('https://63e38171619fce55d41a7579.mockapi.io/user', {
+
+        fetch('https://638208329842ca8d3c9f7558.mockapi.io/users', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json', // qysi formatta yuborish
@@ -131,19 +131,19 @@ function Tests() {
                                             <input onClick={() => {
                                                 !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
                                                 setColor(colorrr + 1)
-                                                
-                                                !questions.includes(questions[(e.id) - 1]) ? 
-                                                questions.push({
+
+                                                !questions.includes(questions[(e.id) - 1]) ?
+                                                    questions.push({
                                                         quest: e.id,
-                                                        answer: item.testId
-                                                    }):
-                                                questions?
-                                                 questions.map((w)=>{
-                                                    if(w.quest == e.id){
-                                                        w.answer = item.testId
-                                                    }
-                                                })
-                                                : questions.push()
+                                                        answer: item.userId
+                                                    }) :
+                                                    questions ?
+                                                        questions.map((w) => {
+                                                            if (w.quest == e.id) {
+                                                                w.answer = item.userId
+                                                            }
+                                                        })
+                                                        : questions.push()
                                                 setQue(questions)
                                             }} type="radio" id={item.testId} name={e.id} value={item.otvet} />
                                             <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>

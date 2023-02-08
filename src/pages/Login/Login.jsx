@@ -12,28 +12,50 @@ function Login() {
     e.preventDefault()
     let userr = e.target.elements.username.value
     let pass = e.target.elements.password.value
-    let elInp = document.getElementsByTagName('input')
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].user === userr && data[i].pass == pass) {
-        window.sessionStorage.setItem('key', `${userr}`)
-        dispatch({ type: "NAME", payload: {userName: userr, tel: pass}})
-        break
-      } else {
-        window.sessionStorage.setItem('key', 'error')
-      }
-    }
-    for (let i = 0; i < elInp.length; i++) {
-      if (window.sessionStorage.getItem('key') == 'error') {
-        elInp[i].style.border = '2px solid red'
 
-      }
-    }
-    data.find((e)=>{
-      if(e.user == window.sessionStorage.getItem('key')){
-        navigate('/test')
-        e.ts = 'close'
+    let elInp = document.getElementsByTagName('input')
+
+    fetch('https://638208329842ca8d3c9f7558.mockapi.io/users', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json', // qysi formatta yuborish
+        'Accept': 'application/json', // qysi formatta uni qabul qilib olishi
+        'Access-Control-Allow-Origin': '*' // ruxsat berish hammaga
       }
     })
+      .then((res) => res.json())
+      .then((data) => mapper(data))
+    const mapper = (q) => {
+      q?.map((w) => {
+        if (w.pass !== pass) {
+          dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
+          navigate('/test')
+        } else {
+          alert('Siz test topwirib boldingiz')
+          navigate('/login')
+          e.target.elements.username.value = '' 
+          e.target.elements.password.value = ''
+          e.target.elements.password.style.border = '1px solid #BD00FF'
+        }
+      })
+    }
+  }
+
+
+  const bgcolor = (e) => {
+    const val = e.target.value
+    if (val.length == 12) {
+      e.target.style.border = '3px solid greenyellow'
+      e.target.style.color = 'greenyellow'
+    }
+    else if (val.length > 12) {
+      e.target.style.border = '1px solid red'
+      e.target.style.color = 'red'
+    }
+    else {
+      e.target.style.color = ''
+      e.target.style.border = '1px solid #BD00FF'
+    }
   }
 
 
@@ -43,8 +65,8 @@ function Login() {
         <div className='login__right'>
           <h2>Руйхатдан утиш</h2>
           <form className='div' action='#' onSubmit={sign}>
-            <input type="text" name='username' placeholder='Email' />
-            <input type="password" name='password' placeholder='Password' />
+            <input type="text" name='username' placeholder='I.F.Sh' />
+            <input onChange={bgcolor} type="number" pattern='[0-3]' name='password' defaultValue={998} />
             <button type='submit'>Next step</button>
           </form>
         </div>
