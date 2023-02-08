@@ -26,7 +26,8 @@ function Login() {
       .then((res) => res.json())
       .then((data) => mapper(data))
     const mapper = (q) => {
-      q?.map((w) => {
+      console.log(q);
+      q.map((w) => {
         if (w.pass !== pass) {
           dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
           navigate('/test')
