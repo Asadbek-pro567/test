@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-size: cover;
     .login{
         width: 100%;
         display: flex;
@@ -44,6 +45,10 @@
                     outline: none;
                     margin: 15px;
                     font-size: 1.5em;
+                    &::placeholder{
+                        color: #B8B8B8;
+                        text-align: center;
+                    }
                 }
                 button{
                     width: 100%;

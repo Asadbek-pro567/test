@@ -3,9 +3,11 @@ import './Login.scss'
 import Login__logo from '../../assets/image/Frame.svg'
 import { useNavigate } from 'react-router-dom'
 import { data } from '../../dataTest/users'
+import { useDispatch } from 'react-redux'
 
 function Login() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const sign = (e) => {
     e.preventDefault()
     let userr = e.target.elements.username.value
@@ -14,6 +16,7 @@ function Login() {
     for (let i = 0; i < data.length; i++) {
       if (data[i].user === userr && data[i].pass == pass) {
         window.sessionStorage.setItem('key', `${userr}`)
+        dispatch({ type: "NAME", payload: {userName: userr, tel: pass}})
         break
       } else {
         window.sessionStorage.setItem('key', 'error')

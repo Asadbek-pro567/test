@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { tests } from '../../dataTest/dataTest'
 import { data } from '../../dataTest/users'
@@ -8,6 +8,7 @@ import './Tests.scss'
 const itemId = []
 const questions = []
 function Tests() {
+    const selector = useSelector((state) => { return state })
 
     const [que, setQue] = useState([])
     console.log(que);
@@ -68,6 +69,7 @@ function Tests() {
     const navigate = useNavigate()
     const [asd, setAsd] = useState(0)
     const done = (e) => {
+
         e.preventDefault()
         navigate('/result')
         tests?.map((e) => {
@@ -79,13 +81,30 @@ function Tests() {
                         otvetlar.push(namee[i].value)
                     }
                     setAsd(asd + 1)
-                    dispatch({ type: "ADD", payload: { questions } })
                     if (val == e.javob) {
                         otvet.push(val)
                     }
                 }
             }
         })
+        dispatch({ type: "QUEST", payload: { questions } })
+        
+        fetch('https://63e38171619fce55d41a7579.mockapi.io/user', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json', // qysi formatta yuborish
+                'Accept': 'application/json', // qysi formatta uni qabul qilib olishi
+                'Access-Control-Allow-Origin': '*' // ruxsat berish hammaga
+            },
+            body: JSON.stringify({
+                userName: selector.test[0].userName,
+                pass: selector.test[0].pass,
+                quest: selector.test[0].question
+            })
+        })
+            .then((res) => res.json())
+            .then((data) => console.table(data))
+
     }
 
     return (
