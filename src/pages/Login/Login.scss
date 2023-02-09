@@ -49,7 +49,6 @@
                 font-size: 2em;
             }
             text-align: center;
-            width: 30%;
             background: linear-gradient(122.18deg, rgba(113, 65, 129, 0.8) 1.31%, rgba(59, 24, 85, 0.8) 99.01%);
             color: #fff;
             border: 1.70303px solid #B98C48;
@@ -81,7 +80,20 @@
                         margin: 0;
                     }
                 }
-                button{
+                .btn{
+                    width: 100%;
+                    height: 60px;
+                    color: #fff;
+                    background: #B8B8B8;
+                    box-shadow: 0px 4px 20px rgba(199, 129, 255, 0.25);
+                    border-radius: 10px;
+                    border: none;
+                    margin-top: 30px;
+                    font-size: 1.8em;
+                    transition: ease-in-out;
+                    cursor: pointer;
+                }
+                .button{
                     width: 100%;
                     height: 60px;
                     color: #fff;
@@ -110,3 +122,23 @@
         }
     }
 }   
+
+@media screen and (max-width: 650px) {
+    body{
+        font-size: 14px;
+    }
+    .containerrr{
+        width: 100%;
+        padding: 0 20px;
+        .login{
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            .login__right{
+                width: 100%;
+                padding: 0px 20px 50px;
+
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../../Context/Context'
 import { tests } from '../../dataTest/dataTest'
 import { data } from '../../dataTest/users'
 import './Tests.scss'
@@ -9,7 +10,7 @@ const itemId = []
 const questions = []
 function Tests() {
     const selector = useSelector((state) => { return state })
-
+    const {result, setResult} = useContext(Context)
 
     
     const [que, setQue] = useState([])
@@ -90,6 +91,7 @@ function Tests() {
                     setAsd(asd + 1)
                     if (val == e.javob) {
                         otvet.push(val)
+                        setResult(otvet)
                     }
                 }
             }

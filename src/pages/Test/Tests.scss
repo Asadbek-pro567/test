@@ -137,3 +137,44 @@ body {
         }
     }
 }
+
+
+@media screen and (max-width: 960px) {
+    body{
+        font-size: 14px;
+    }
+    .container{
+        width: 100%;
+        padding: 0 20px;
+        margin: 0;
+        ul{
+            margin: 0;
+            width: 100%;
+            h5{
+                font-size: 1.4em;
+            }
+        }
+        ol{
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            form{
+                width: 100%;
+                li{
+                    width: 100%;
+                    padding: 20px;
+                    margin: 20px 0;
+                    h3{
+                        font-size: 1em;
+                    }
+                    h4{
+                        font-size: 0.8;
+                    }
+                }
+                button{
+                    margin-bottom: 50px;
+                }
+            }
+        }
+    }
+}

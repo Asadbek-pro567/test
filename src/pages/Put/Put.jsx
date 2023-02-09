@@ -18,15 +18,23 @@ function Put() {
                     </div>
                     <div>
                         <img src={list} alt="" />
-                        <h4>Frontend</h4>
+                        <h4>Backend</h4>
                     </div>
                     <div>
                         <img src={list} alt="" />
-                        <h4>Frontend</h4>
+                        <h4>SMM Marketing</h4>
                     </div>
                     <div>
                         <img src={list} alt="" />
-                        <h4>Frontend</h4>
+                        <h4>3D MAX</h4>
+                    </div>
+                    <div>
+                        <img src={list} alt="" />
+                        <h4>Dizayner</h4>
+                    </div>
+                    <div>
+                        <img src={list} alt="" />
+                        <h4>Logistics</h4>
                     </div>
                     <div>
                         <img src={list} alt="" />
