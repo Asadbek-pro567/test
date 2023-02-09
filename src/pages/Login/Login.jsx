@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './Login.scss'
 import Login__logo from '../../assets/image/Frame.svg'
 import { useNavigate } from 'react-router-dom'
@@ -8,13 +8,13 @@ import { useDispatch } from 'react-redux'
 function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
   const sign = (e) => {
     e.preventDefault()
     let userr = e.target.elements.username.value
     let pass = e.target.elements.password.value
-
-    let elInp = document.getElementsByTagName('input')
-
+    setLoading(true)
     fetch('https://638208329842ca8d3c9f7558.mockapi.io/users', {
       method: 'GET',
       headers: {
@@ -25,20 +25,27 @@ function Login() {
     })
       .then((res) => res.json())
       .then((data) => mapper(data))
+      .then(()=> setLoading(false))
+    
     const mapper = (q) => {
       console.log(q);
-      q.map((w) => {
-        if (w.pass !== pass) {
-          dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
-          navigate('/test')
-        } else {
-          alert('Siz test topwirib boldingiz')
-          navigate('/login')
-          e.target.elements.username.value = '' 
-          e.target.elements.password.value = ''
-          e.target.elements.password.style.border = '1px solid #BD00FF'
-        }
-      })
+      if(q.length == 0){
+        dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
+        navigate('/test')
+      }else{
+        q?.map((w) => {
+          if (w.pass !== pass) {
+            dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
+            navigate('/test')
+          } else {
+            alert('Siz test topwirib boldingiz')
+            navigate('/login')
+            e.target.elements.username.value = '' 
+            e.target.elements.password.value = ''
+            e.target.elements.password.style.border = '1px solid #BD00FF'
+          }
+        })
+      }
     }
   }
 
@@ -62,16 +69,20 @@ function Login() {
 
   return (
     <div className='containerrr'>
-      <div className='login'>
-        <div className='login__right'>
-          <h2>Руйхатдан утиш</h2>
-          <form className='div' action='#' onSubmit={sign}>
-            <input type="text" name='username' placeholder='I.F.Sh' />
-            <input onChange={bgcolor} type="number" pattern='[0-3]' name='password' defaultValue={998} />
-            <button type='submit'>Next step</button>
-          </form>
+      {
+        loading ? 
+        <span></span> :
+        <div className='login'>
+          <div className='login__right'>
+            <h2>Руйхатдан утиш</h2>
+            <form className='div' action='#' onSubmit={sign}>
+              <input type="text" name='username' placeholder='I.F.Sh' />
+              <input onChange={bgcolor} type="number" pattern='[0-3]' name='password' defaultValue={998} />
+              <button type='submit'>Next step</button>
+            </form>
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 }

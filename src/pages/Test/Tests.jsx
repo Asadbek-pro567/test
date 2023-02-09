@@ -11,29 +11,29 @@ function Tests() {
     const selector = useSelector((state) => { return state })
 
     const [que, setQue] = useState([])
-    console.log(que);
+    const [loading, setLoading] = useState(false)
     const getPadTime = (time) => time.toString().padStart(2, '0')
-    const [timeleft, setTimeleft] = useState(10)
+    const [timeleft, setTimeleft] = useState(5*60)
     const [tori, setTori] = useState(true)
     const minutes = getPadTime(Math.floor(timeleft / 60))
     const seconds = getPadTime(timeleft - minutes * 60)
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setTimeleft((timeleft) => timeleft >= 1 ? timeleft - 1 : 0)
-    //     }, 1000)
-    //     if (timeleft === 0) setTori(false)
-    //     if (data.map((e) => e.ts) == 'close') {
-    //         navigate('/')
-    //         alert(`Вы закончили тест. Ваш результат: 30б`)
-    //     } else {
-    //         setTimeout(() => {
-    //             // navigate('/result')
-    //         }, timeleft * 1000);
-    //     }
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // }, [timeleft, tori])
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeleft((timeleft) => timeleft >= 1 ? timeleft - 1 : 0)
+        }, 1000)
+        if (timeleft === 0) setTori(false)
+        if (timeleft == 0) {
+            navigate('/')
+            alert(`Вы закончили тест. Ваш результат: 30б`)
+        } else {
+            setTimeout(() => {
+                // navigate('/result')
+            }, timeleft * 1000);
+        }
+        return () => {
+            clearInterval(interval)
+        }
+    }, [timeleft, tori])
 
     const otvet = []
     const otvetlar = []
@@ -69,9 +69,14 @@ function Tests() {
     const navigate = useNavigate()
     const [asd, setAsd] = useState(0)
     const done = (e) => {
-
         e.preventDefault()
-        navigate('/result')
+        setLoading(true)
+        setTimeleft(99999)
+
+        setTimeout(() => {
+            navigate('/result')
+            setLoading(false)
+        }, 2000)
         tests?.map((e) => {
             for (let i = 0; i < namee.length; i++) {
                 if (namee[i].checked) {
@@ -109,53 +114,59 @@ function Tests() {
 
     return (
         <div className='container'>
-            <h1>Matem</h1>
-            <p>{minutes} : {seconds}</p>
-            <ul>
-                <h5>Matem (3.1ball)</h5>
-                {
-                    tests?.map((e, i) => (
-                        <li key={i} className='sonlar'>{e.id}</li>
-                    ))
-                }
-            </ul>
-            <ol>
-                <form action="#" onSubmit={done}>
-                    {
-                        tests?.map((e, i) => (
-                            <li key={i}>
-                                <h3>{e.savol}</h3>
+            {
+                loading ? 
+                <span className='spam'></span> :
+                    <>
+                        <h1>Matem</h1>
+                        <p>{minutes} : {seconds}</p>
+                        <ul>
+                            <h5>Matem (3.1ball)</h5>
+                            {
+                                tests?.map((e, i) => (
+                                    <li key={i} className='sonlar'>{e.id}</li>
+                                ))
+                            }
+                        </ul>
+                        <ol>
+                            <form action="#" onSubmit={done}>
                                 {
-                                    e.otvetlar.map((item, k) => (
-                                        <h4 key={k}>
-                                            <input onClick={() => {
-                                                !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
-                                                setColor(colorrr + 1)
+                                    tests?.map((e, i) => (
+                                        <li key={i}>
+                                            <h3>{e.savol}</h3>
+                                            {
+                                                e.otvetlar.map((item, k) => (
+                                                    <h4 key={k}>
+                                                        <input onClick={() => {
+                                                            !itemId.includes(e.id) ? itemId.push(e.id) : itemId.push()
+                                                            setColor(colorrr + 1)
 
-                                                !questions.includes(questions[(e.id) - 1]) ?
-                                                    questions.push({
-                                                        quest: e.id,
-                                                        answer: item.userId
-                                                    }) :
-                                                    questions ?
-                                                        questions.map((w) => {
-                                                            if (w.quest == e.id) {
-                                                                w.answer = item.userId
-                                                            }
-                                                        })
-                                                        : questions.push()
-                                                setQue(questions)
-                                            }} type="radio" id={item.testId} name={e.id} value={item.otvet} />
-                                            <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
-                                        </h4>
+                                                            !questions.includes(questions[(e.id) - 1]) ?
+                                                                questions.push({
+                                                                    quest: e.id,
+                                                                    answer: item.userId
+                                                                }) :
+                                                                questions ?
+                                                                    questions.map((w) => {
+                                                                        if (w.quest == e.id) {
+                                                                            w.answer = item.userId
+                                                                        }
+                                                                    })
+                                                                    : questions.push()
+                                                            setQue(questions)
+                                                        }} type="radio" id={item.testId} name={e.id} value={item.otvet} />
+                                                        <label htmlFor={item.testId}>{item.userId}) {item.otvet}</label>
+                                                    </h4>
+                                                ))
+                                            }
+                                        </li>
                                     ))
                                 }
-                            </li>
-                        ))
-                    }
-                    <button type='submit'>Отправить</button>
-                </form>
-            </ol>
+                                <button type='submit'>Отправить</button>
+                            </form>
+                        </ol>
+                    </>
+            }
         </div>
     )
 }
