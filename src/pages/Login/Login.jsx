@@ -43,7 +43,7 @@ function Login() {
         q?.map((w) => {
           if (w.pass == pass) {
             navigate('/login')
-            // alert('Siz test topwirib boldingiz')
+            alert('Siz test topwirib boldingiz')
             e.target.elements.username.value = ''
             e.target.elements.password.value = ''
             e.target.elements.password.style.border = '1px solid #BD00FF'
