@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 function Glavniy() {
     const navigate = useNavigate()
-
     const done = ()=>{
       navigate('/put')
     }

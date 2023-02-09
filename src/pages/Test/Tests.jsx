@@ -67,6 +67,15 @@ function Tests() {
         }
     }, [colorrr])
 
+    const [countt, setCountt] = useState(0)
+    useEffect(()=>{
+        setCountt(countt + 1)
+    },[])
+    useEffect(()=>{
+        if(selector.test[0].userName == '' && selector.test[0].pass == ''){
+            navigate('/login')
+        }
+    }, [countt])
 
     const navigate = useNavigate()
     const [asd, setAsd] = useState(0)

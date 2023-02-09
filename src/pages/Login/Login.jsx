@@ -90,6 +90,7 @@ function Login() {
               <form className='div' action='#' onSubmit={sign}>
                 <input type="text" name='username' placeholder='F.I.Sh' />
                 <input onChange={bgcolor} type="number" name='password' defaultValue={998} />
+                <label htmlFor="" style={{color: '#b8b8b8'}}>Telefon raqam: 12 ta sondan iborat bolsin</label>
                 <button type='submit' className={disable ? 'btn' : 'button'} disabled={disable ? true : false}>Next step</button>
               </form>
             </div>
