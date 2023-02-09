@@ -12,8 +12,6 @@ function Tests() {
     const selector = useSelector((state) => { return state })
     const {result, setResult} = useContext(Context)
 
-    window.sessionStorage.setItem('key', 'error')
-    
     const [que, setQue] = useState([])
     const [loading, setLoading] = useState(false)
     const getPadTime = (time) => time.toString().padStart(2, '0')
@@ -114,7 +112,10 @@ function Tests() {
         })
             .then((res) => res.json())
             .then((data) => console.table(data))
+    }
 
+    if(window.sessionStorage.getItem('key') == 'err'){
+        navigate('/login')
     }
 
     return (

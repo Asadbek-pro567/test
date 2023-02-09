@@ -31,24 +31,26 @@ function Login() {
 
     const mapper = (q) => {
       console.log(q);
-      if (q.length == 0) {
+      if (q.length <= 0) {
         if (userr.length > 3 && pass.length == 12) {
           dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
           navigate('/test')
-          window.sessionStorage.setItem('key', 'true')
+        }
+        else{
+          console.log('error');
         }
       } else {
         q?.map((w) => {
-          if (w.pass !== pass) {
-            dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
-            navigate('/test')
-          }
-          else {
-            alert('Siz test topwirib boldingiz')
+          if (w.pass == pass) {
             navigate('/login')
+            // alert('Siz test topwirib boldingiz')
             e.target.elements.username.value = ''
             e.target.elements.password.value = ''
             e.target.elements.password.style.border = '1px solid #BD00FF'
+          }
+          else {
+            dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
+            navigate('/test')
           }
         })
       }

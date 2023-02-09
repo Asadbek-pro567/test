@@ -6,10 +6,8 @@ import { useNavigate } from 'react-router-dom'
 function Glavniy() {
     const navigate = useNavigate()
 
-    window.sessionStorage.setItem('key', 'error')
     const done = ()=>{
       navigate('/put')
-      window.sessionStorage.setItem('key', 'true')
     }
   return (
     <div>
