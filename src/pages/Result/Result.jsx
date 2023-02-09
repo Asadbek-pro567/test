@@ -26,7 +26,6 @@ function Result() {
     <div className='containerr'>
       <div className="result">
         <div className="flex">
-
           <div className="circle">
             <div className="inner">
               <h2>Matem</h2>

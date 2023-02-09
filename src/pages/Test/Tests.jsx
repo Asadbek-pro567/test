@@ -12,6 +12,7 @@ function Tests() {
     const selector = useSelector((state) => { return state })
     const {result, setResult} = useContext(Context)
 
+    window.sessionStorage.setItem('key', 'error')
     
     const [que, setQue] = useState([])
     const [loading, setLoading] = useState(false)
@@ -75,7 +76,7 @@ function Tests() {
         e.preventDefault()
         setLoading(true)
         setTimeleft(99999)
-
+        window.sessionStorage.setItem('key', 'true')
         setTimeout(() => {
             navigate('/result')
             setLoading(false)

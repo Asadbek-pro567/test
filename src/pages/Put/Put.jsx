@@ -5,6 +5,12 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 function Put() {
     const navigate = useNavigate()
+    window.sessionStorage.setItem('key', 'error')
+
+    const done = ()=>{
+        navigate('/login')
+        window.localStorage.setItem('key', 'true')
+    }
 
   return (
     <div>

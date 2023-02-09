@@ -11,6 +11,7 @@ function Login() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [disable, setDisable] = useState(true)
+
   const sign = (e) => {
     e.preventDefault()
     let userr = e.target.elements.username.value
@@ -34,12 +35,13 @@ function Login() {
         if (userr.length > 3 && pass.length == 12) {
           dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
           navigate('/test')
+          window.sessionStorage.setItem('key', 'true')
         }
       } else {
         q?.map((w) => {
           if (w.pass !== pass) {
             dispatch({ type: "NAME", payload: { userName: userr, tel: pass } })
-            // navigate('/test')
+            navigate('/test')
           }
           else {
             alert('Siz test topwirib boldingiz')
