@@ -22,9 +22,13 @@ function Result() {
   }, [])
 
   const natija = result.length * 3.1
+  let obj  = {
+    quer: '<p>sadasdas</p>'
+  }
   return (
     <div className='containerr'>
-      <div className="result">
+      <p  dangerouslySetInnerHTML = {{ __html:`<b>1</b>`+ obj?.quer }}></p>
+      <div  className="result">
         <div className="flex">
           <div className="circle">
             <div className="inner">
